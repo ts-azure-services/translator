@@ -1,0 +1,2 @@
+Microsoft's translation engine is powered by two different approaches: statistical machine translation (SMT)
+and neural machine translation (NMT).
