@@ -1,13 +1,13 @@
 import os
 import requests
 import uuid
-import json
-import time
-import http.client
 from dotenv import load_dotenv
 import random
 
 class textTranslate:
+    """
+    Class to highlight the functionality of text translate
+    """
     def __init__(self, sample_filename=None):
         if sample_filename == None:
             sample_filename = './data-files/text_translation/msft-values.txt'
@@ -16,7 +16,7 @@ class textTranslate:
         self.language_list_file = './data-files/text_translation/lang_list.txt'
         self.env_variables = './variables.env'
         self.auth_dict = self.load_variables()
-        self.language_dictionary, self.sample_list = self.load_languages(self.language_list_file)
+        self.language_dictionary, self.sample_list = self.load_languages()
         self.cog_rg = self.auth_dict['cog_rg']
         self.cog_name = self.auth_dict['cog_name']
         self.cog_key = self.auth_dict['cog_key']
@@ -32,7 +32,7 @@ class textTranslate:
 
     def load_variables(self):
         """Load up env variables of the API key & location"""
-        env_var=load_dotenv(self.env_variables)
+        load_dotenv(self.env_variables)
         auth_dict = {
                 "cog_rg":os.environ['RESOURCE_GROUP'],
                 "cog_name":os.environ['TRANSLATOR_NAME'],
@@ -49,7 +49,7 @@ class textTranslate:
             data = f.read().replace('\n', ' ')
         return data
 
-    def load_single_line_text(self, filename=None):
+    def load_single_line_text(self, filename):
         statements = []
         with open(filename, 'r') as f:
             for line in f.readlines():
@@ -57,7 +57,7 @@ class textTranslate:
                 statements.append(line)
         return statements
 
-    def load_languages(self, filename):
+    def load_languages(self):
         """Create a random list of languages to test"""
         ld = {}
         with open(self.language_list_file) as f:
@@ -133,6 +133,9 @@ class textTranslate:
             print("")
 
 class documentTranslate(textTranslate):
+    """
+    Class to highlight document translation
+    """
 
     def translate_docs(self, source_lang='en', target_lang='es'):
         """Create a function that makes a REST request for a Document Translate"""
@@ -222,13 +225,13 @@ class customTranslate(textTranslate):
         return response
         #return response[0]["translations"][0]["text"]
 
-    def one_language(self, category_id=None, to_lang=None, from_lang=None):
+    def one_language(self, category_id=None, to_lang=None, from_lang='en'):
         """Test the API for one language"""
         # Feed in the custom translation text based upon the demo artifacts
         translation = self.custom_translate(
                 text=self.sample_text, 
                 category_id=None, 
-                to_lang=to_lang, from_lang='en')
+                to_lang=to_lang, from_lang=from_lang)
         print(f"********************")
         print(f"Text to translate (in English):\n {self.sample_text}")
         print(f"\033[92m Translated text (in {self.language_dictionary[to_lang]}):\n {translation} \033[00m")

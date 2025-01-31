@@ -1,14 +1,12 @@
 # Azure Translator
 - A repo to house code and artifacts to demo Azure Translator services. This wraps a few Python methods around
-  the REST APIs and is driven through the `translation.py` file. The `sentences.py` file offers an independent
-  example of translating a number of sentences into any other supported language.
-- Translator Documentation: https://docs.microsoft.com/en-us/azure/cognitive-services/translator/translator-overview
-- Custom translator portal: https://portal.customtranslator.azure.ai/
+  the REST APIs. The `main.py` file offers an independent example of translating a number of sentences into any other supported language.
+- For translator documentation, see [here](https://docs.microsoft.com/en-us/azure/cognitive-services/translator/translator-overview) and for the custom translator portal, see [here](https://portal.customtranslator.azure.ai/)
 
 # Sample Code
 ## Text Translate
-> Real-time transcription, up to 10k characters in a single request. Leverages sample text containing
-Microsoft's mission statement and values to showcase translations.
+> *Real-time transcription, up to 10k characters in a single request. Leverages sample text containing
+Microsoft's mission statement and values to showcase translations.*
 
 ```python
 # Import the class, and initialize the sample text
